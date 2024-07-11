@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/bebarkbaloch.github.io/static/css/main.fb4de834.css",
-    "main.js": "/bebarkbaloch.github.io/static/js/main.e6beecbc.js",
-    "static/js/453.c6a2df6c.chunk.js": "/bebarkbaloch.github.io/static/js/453.c6a2df6c.chunk.js",
-    "index.html": "/bebarkbaloch.github.io/index.html",
-    "main.fb4de834.css.map": "/bebarkbaloch.github.io/static/css/main.fb4de834.css.map",
-    "main.e6beecbc.js.map": "/bebarkbaloch.github.io/static/js/main.e6beecbc.js.map",
-    "453.c6a2df6c.chunk.js.map": "/bebarkbaloch.github.io/static/js/453.c6a2df6c.chunk.js.map"
+    "main.css": "/DynamicComboDeals/static/css/main.fb4de834.css",
+    "main.js": "/DynamicComboDeals/static/js/main.667595ba.js",
+    "static/js/453.c6a2df6c.chunk.js": "/DynamicComboDeals/static/js/453.c6a2df6c.chunk.js",
+    "index.html": "/DynamicComboDeals/index.html",
+    "main.fb4de834.css.map": "/DynamicComboDeals/static/css/main.fb4de834.css.map",
+    "main.667595ba.js.map": "/DynamicComboDeals/static/js/main.667595ba.js.map",
+    "453.c6a2df6c.chunk.js.map": "/DynamicComboDeals/static/js/453.c6a2df6c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.fb4de834.css",
-    "static/js/main.e6beecbc.js"
+    "static/js/main.667595ba.js"
   ]
 }
