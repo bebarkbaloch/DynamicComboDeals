@@ -1,12 +1,11 @@
 import React from 'react';
-import { render, screen, fireEvent, waitFor ,act} from '@testing-library/react';
+import { render, screen, fireEvent, waitFor, act } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import comboReducer from '../store/comboSlice';
 import ComboPicker from '../components/ComboPicker';
-import fetchMock from 'jest-fetch-mock';
 import '@testing-library/jest-dom';
-fetchMock.enableMocks();
+
 
 const renderWithProviders = (ui: React.ReactElement) => {
     const store = configureStore({
@@ -19,11 +18,10 @@ const renderWithProviders = (ui: React.ReactElement) => {
 
 describe('ComboPicker', () => {
     beforeEach(() => {
-        fetchMock.resetMocks();
+        jest.clearAllMocks();
     });
 
     afterEach(() => {
-
         jest.restoreAllMocks();
     });
 
@@ -33,22 +31,9 @@ describe('ComboPicker', () => {
         expect(screen.getByText(/Select your combo:/i)).toBeInTheDocument();
     });
 
-    test('fetches and displays combo options', async () => {
-        fetchMock.mockResponseOnce(
-            JSON.stringify({
-                data: [
-                    { chips: 'Lays Salted', drink: 'Pepsi', chocolate: 'Cadbury' },
-                    { chips: 'Slims', drink: '7Up', chocolate: 'Perk' },
-                    { chips: 'Potato Sticks', drink: 'Pepsi', chocolate: 'Now' },
-                    { chips: 'Slanty', drink: 'Miranda', chocolate: 'Cadbury' },
-                    { chips: 'Slims', drink: 'Pepsi', chocolate: 'Perk' },
-                ],
-            })
-        );
-
+    test('displays combo options', async () => {
         renderWithProviders(<ComboPicker />);
 
-        expect(screen.getByRole('progressbar', { name: /tail-spin-loading/i })).toBeInTheDocument();
 
         await waitFor(() => {
             expect(screen.queryByRole('progressbar', { name: /tail-spin-loading/i })).not.toBeInTheDocument();
@@ -61,18 +46,6 @@ describe('ComboPicker', () => {
     });
 
     test('handles tab selection', async () => {
-        fetchMock.mockResponseOnce(
-            JSON.stringify({
-                data: [
-                    { chips: 'Lays Salted', drink: 'Pepsi', chocolate: 'Cadbury' },
-                    { chips: 'Slims', drink: '7Up', chocolate: 'Perk' },
-                    { chips: 'Potato Sticks', drink: 'Pepsi', chocolate: 'Now' },
-                    { chips: 'Slanty', drink: 'Miranda', chocolate: 'Cadbury' },
-                    { chips: 'Slims', drink: 'Pepsi', chocolate: 'Perk' },
-                ],
-            })
-        );
-
         await act(async () => {
             renderWithProviders(<ComboPicker />);
         });
@@ -85,23 +58,11 @@ describe('ComboPicker', () => {
 
         expect(screen.getByText(/Pepsi/i)).toBeInTheDocument();
         expect(screen.getByText(/7Up/i)).toBeInTheDocument();
-        expect(screen.getByText(/Miranda/i)).toBeInTheDocument();
+        expect(screen.getByText(/Mirinda/i)).toBeInTheDocument();
         expect(screen.queryByText(/Lays Salted/i)).not.toBeInTheDocument();
     });
 
     test('handles option selection and dynamic updates', async () => {
-        fetchMock.mockResponseOnce(
-            JSON.stringify({
-                data: [
-                    { chips: 'Lays Salted', drink: 'Pepsi', chocolate: 'Cadbury' },
-                    { chips: 'Slims', drink: '7Up', chocolate: 'Perk' },
-                    { chips: 'Potato Sticks', drink: 'Pepsi', chocolate: 'Now' },
-                    { chips: 'Slanty', drink: 'Miranda', chocolate: 'Cadbury' },
-                    { chips: 'Slims', drink: 'Pepsi', chocolate: 'Perk' },
-                ],
-            })
-        );
-
         renderWithProviders(<ComboPicker />);
 
         await waitFor(() => {
@@ -124,18 +85,6 @@ describe('ComboPicker', () => {
     });
 
     test('resets combo selection', async () => {
-        fetchMock.mockResponseOnce(
-            JSON.stringify({
-                data: [
-                    { chips: 'Lays Salted', drink: 'Pepsi', chocolate: 'Cadbury' },
-                    { chips: 'Slims', drink: '7Up', chocolate: 'Perk' },
-                    { chips: 'Potato Sticks', drink: 'Pepsi', chocolate: 'Now' },
-                    { chips: 'Slanty', drink: 'Miranda', chocolate: 'Cadbury' },
-                    { chips: 'Slims', drink: 'Pepsi', chocolate: 'Perk' },
-                ],
-            })
-        );
-
         renderWithProviders(<ComboPicker />);
 
         await waitFor(() => {

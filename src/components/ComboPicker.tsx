@@ -5,6 +5,7 @@ import { selectChips, selectDrink, selectChocolate, resetCombo } from '../store/
 import { OptionType } from '../utils/constants';
 import CustomLabel from './CustomLabel';
 import CustomLoader from './CustomLoader';
+import  CombosData from '../assets/combos.json'
 
 const ComboPicker: React.FC = () => {
     const dispatch = useDispatch();
@@ -19,21 +20,28 @@ const ComboPicker: React.FC = () => {
 
 
         useEffect(() => {
-            fetch('/combos.json')
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! Status: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    setCombos(data.data);
-                    setUniqueChips([...new Set(data.data.map((combo: any) => combo.chips))]);
-                    setLoader(false)
-                })
-                .catch((error) => console.log('Error fetching combos:', error))
+            //For fetching file from server side we will include this code below
 
-        }, []);
+            // fetch('/combos.json')
+            //     .then((response) => {
+            //         if (!response.ok) {
+            //             throw new Error(`HTTP error! Status: ${response.status}`);
+            //         }
+            //         return response.json();
+            //     })
+            //     .then((data) => {
+            //         setCombos(data.data);
+            //         setUniqueChips([...new Set(data.data.map((combo: any) => combo.chips))]);
+            //         setLoader(false)
+            //     })
+            //     .catch((error) => console.log('Error fetching combos:', error))
+
+        // For importing data from local json file
+                    let data:any = CombosData
+                    setCombos(data?.data);
+                    setUniqueChips([...new Set(data?.data?.map((combo: any) => combo.chips))]);
+                     setLoader(false)
+        }, [CombosData]);
 
 
 
